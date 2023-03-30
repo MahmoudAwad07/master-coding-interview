@@ -156,6 +156,44 @@ public class LinkedList {
         return -1;
     }
 
+    public int[] toArray(){
+
+        int[] array = new int[this.size()];
+        int index = 0;
+
+        Node currentNode = this.first;
+        while (currentNode != null){
+            array[index] = currentNode.getValue();
+            currentNode = currentNode.getNext();
+            index++;
+        }
+
+        return array;
+    }
+
+    public LinkedList reverse(){
+
+        Node currentNode = this.first;
+        Node previousNode = null;
+        Node nextNode = null;
+
+        while (currentNode != null){
+            // store the next element to keep track of it
+            nextNode = currentNode.getNext();
+            // set the next element to be the previous
+            currentNode.setNext(previousNode);
+            // move the pointers
+            previousNode = currentNode;
+            currentNode = nextNode;
+        }
+
+        // set the first and last
+        last = this.first;
+        first = previousNode;
+
+        return this;
+    }
+
     public void printLinkList() {
 
         if (size == 0) {
@@ -172,4 +210,11 @@ public class LinkedList {
         System.out.println();
     }
 
+    public Node getFirst() {
+        return first;
+    }
+
+    public Node getLast() {
+        return last;
+    }
 }
