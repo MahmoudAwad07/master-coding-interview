@@ -8,6 +8,8 @@ public class RearrangeMaxMin {
     public static void maxMin(int[] arr) {
 
         // Write - Your - Code
+        // Time Complexity --> O(2n) --> o(n)
+        // Space Complexity --> O(n)
 
         int[] newArray = new int[arr.length];
         int leftIndex = 0;
@@ -37,14 +39,51 @@ public class RearrangeMaxMin {
     }
 
     public static void maxMin_v2(int[] arr) {
+
+        // Write - Your - Code
+        // Time Complexity --> O(2n) --> o(n)
+        // Space Complexity --> O(n)
+
+        int[] result = new int[arr.length];
+
+        int rightIndex = arr.length - 1;
+        int leftIndex = 0;
+
+        boolean switchPointer = true ; // Flag to switch between the pointers
+
+        for (int i = 0 ; i < arr.length; i++){
+
+            if(switchPointer){
+                result[i] = arr[rightIndex--];
+            }else {
+                result[i] = arr[leftIndex++];
+            }
+
+            switchPointer = !switchPointer; // flip the flag
+        }
+
+        for (int i = 0 ; i < arr.length ; i++){
+            arr[i] = result[i];
+        }
+
+        System.out.println(Arrays.toString(result));
+        System.out.println(Arrays.toString(arr));
+    }
+
+
+    public static void maxMin_v3(int[] arr) {
+
+        // Write - Your - Code
+        // Time Complexity --> O(2n) --> o(n)
+        // Space Complexity --> O(1)
+
         int maxIdx = arr.length - 1;
         int minIdx = 0;
         int maxElem = arr[maxIdx] + 1; // store any element that is greater than the maximum element in the array
         for( int i = 0; i < arr.length; i++) {
             // at even indices we will store maximum elements
             if (i % 2 == 0){
-                int num = arr[maxIdx] % maxElem;
-                arr[i] += num * maxElem;
+                arr[i] += (arr[maxIdx] % maxElem) * maxElem;
                 maxIdx -= 1;
             }
             else { // at odd indices we will store minimum elements
@@ -67,9 +106,11 @@ public class RearrangeMaxMin {
         int[] array2 = new int[]{1, 2, 3, 4, 5};
 
         int[] array3 = new int[]{2, 5, 8, 10, 13};
+        int[] array4 = new int[]{1,2,3,4,5,6};
         maxMin(array);
         maxMin_v2(array2);
         maxMin_v2(array3);
+        maxMin_v3(array4);
 
     }
 }
