@@ -7,6 +7,9 @@ public class LinkedListReverseTwo {
 
     public static ListNode reverseBetween(ListNode head, int left, int right) {
 
+        // Time Complexity --> O(n)
+        // Space Complexity --> O(1)
+
         if(left == right || head == null){
             return head;
         }

@@ -8,6 +8,9 @@ public class LinkedListCycle {
 
     public static boolean hasCycle(ListNode head) {
 
+        // Time Complexity --> O(n)
+        // Space Complexity --> O(n)
+
         Set<ListNode> visitedNodes = new HashSet<>();
         ListNode currentNode = head;
 
@@ -24,6 +27,9 @@ public class LinkedListCycle {
     }
 
     public static boolean hasCycle_v2(ListNode head) {
+
+        // Time Complexity --> O(n)
+        // Space Complexity --> O(1)
 
         ListNode slowPointer = head;
         ListNode fastPointer = head;
