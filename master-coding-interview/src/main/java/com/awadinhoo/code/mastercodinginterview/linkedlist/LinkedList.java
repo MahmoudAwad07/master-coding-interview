@@ -210,6 +210,18 @@ public class LinkedList {
         System.out.println();
     }
 
+    public void addCycle(int pos){
+
+        int index = 0;
+        Node currentNode = this.first;
+        while (index < pos){
+            currentNode = currentNode.getNext();
+            index++;
+        }
+
+
+    }
+
     public Node getFirst() {
         return first;
     }
