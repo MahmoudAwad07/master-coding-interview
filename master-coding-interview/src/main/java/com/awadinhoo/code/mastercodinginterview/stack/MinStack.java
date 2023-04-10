@@ -7,7 +7,6 @@ public class MinStack {
 
     Stack<Integer> storageStack;
     Stack<Integer> minStack;
-    int min;
 
     public MinStack() {
         storageStack = new Stack<>();
@@ -16,16 +15,22 @@ public class MinStack {
 
     public void push(int val) {
 
+
         if(this.storageStack.isEmpty()){
-            this.min = val;
+            // first step, the 2 stacks are empty
+            this.minStack.push(val);
         }else {
-            if(val < min){
-                this.min = val;
+
+            int prevMin = this.minStack.peek();
+            // check to know the new Min
+            if(val < prevMin ){
+                this.minStack.push(val);
+            }else {
+                this.minStack.push(prevMin);
             }
         }
-
         this.storageStack.push(val);
-        this.minStack.push(this.min);
+
     }
 
     public void pop() {

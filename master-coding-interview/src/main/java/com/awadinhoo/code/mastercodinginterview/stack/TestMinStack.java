@@ -24,28 +24,26 @@ public class TestMinStack {
 
         // ["MinStack","push","push","getMin","getMin","push","getMin","getMin","top","getMin","pop","push","push","getMin","push","pop","top","getMin","pop"]
         // [[],[-10],[14],[],[],[-20],[],[],[],[],[],[10],[-7],[],[-7],[],[],[],[]]
-        // [ -10, 14, 10 , -7 ,
-        // [ -10, -10, -10, -10 ,
 
         MinStack minStack2 = new MinStack();
 
-        minStack2.push(-10);
-        minStack2.push(14);
-        System.out.println(minStack2.getMin());
-        System.out.println(minStack2.getMin());
-        minStack2.push(-20);
-        System.out.println(minStack2.getMin());
-        System.out.println(minStack2.top());
-        System.out.println(minStack2.getMin());
-        minStack2.pop();
-        minStack2.push(10);
-        minStack2.push(-7);
-        System.out.println(minStack2.getMin());
-        minStack2.push(-7);
-        minStack2.pop();
-        System.out.println(minStack2.top());
-        System.out.println(minStack2.getMin());
-        minStack2.pop();
+        minStack2.push(-10); //[-10] // [-10]
+        minStack2.push(14); //[-10, 14] // [-10,-10]
+        System.out.println(minStack2.getMin()); // -10
+        System.out.println(minStack2.getMin()); // -10
+        minStack2.push(-20); //[-10, 14,-20] // [-10,-10,-20]
+        System.out.println(minStack2.getMin()); // -20
+        System.out.println(minStack2.top()); // -20
+        System.out.println(minStack2.getMin()); // -20
+        minStack2.pop(); //[-10, 14] // [-10,-10]
+        minStack2.push(10); //[-10, 14, 10] // [-10,-10,-10]
+        minStack2.push(-7); //[-10, 14, 10, -7] // [-10,-10,-10, -10]
+        System.out.println(minStack2.getMin()); // -10
+        minStack2.push(-7); //[-10, 14, 10, -7, -7] // [-10,-10,-10, -10,-10]
+        minStack2.pop(); //[-10, 14, 10, -7] // [-10,-10,-10, -10]
+        System.out.println(minStack2.top()); // -7
+        System.out.println(minStack2.getMin()); // -10
+        minStack2.pop();  //[-10, 14, 10] // [-10,-10,-10]
 
 
     }
