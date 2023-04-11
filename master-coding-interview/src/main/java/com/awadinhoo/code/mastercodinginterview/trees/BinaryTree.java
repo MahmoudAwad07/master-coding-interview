@@ -125,6 +125,57 @@ public class BinaryTree {
         list.add(root.val);
     }
 
+    public int height(){
+        return height(root);
+    }
+
+    private int height(BinaryTreeNode root){
+
+        if(root == null){
+            return -1;
+        }
+
+        if(isLeaf(root)){
+            return 0;
+        }
+        return (1 + Math.max(height(root.left), height(root.right)));
+
+    }
+
+    public int min(){
+
+        if(root == null){
+            throw new IllegalStateException("Binary Tree is Empty");
+        }
+       return minBT(root);
+    }
+
+    private int minBST(BinaryTreeNode root){
+
+        if(root.left == null){
+            return root.val;
+        }
+
+        return minBST(root.left);
+    }
+
+    private int minBT(BinaryTreeNode root){
+
+        if(root == null){
+            return Integer.MAX_VALUE;
+        }
+
+        if(isLeaf(root)){
+            return root.val;
+        }
+
+        return Math.min(Math.min(minBT(root.left),minBT(root.right)), root.val);
+    }
+
+    private boolean isLeaf(BinaryTreeNode root){
+        return root.left == null && root.right == null;
+    }
+
 
     private class BinaryTreeNode{
 
@@ -145,6 +196,29 @@ public class BinaryTree {
                     '}';
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BinaryTree newTree = (BinaryTree) o;
+
+        return isEqualsBT(root ,newTree.root);
+    }
+
+    private boolean isEqualsBT(BinaryTreeNode root, BinaryTreeNode newRoot) {
+
+        if(root == null && newRoot == null){
+            return true;
+        }
+
+        if( (root != null && newRoot == null) || (root == null && newRoot != null) ){
+            return false;
+        }
+
+        return  (root.val == newRoot.val) && isEqualsBT(root.left , newRoot.left) && isEqualsBT(root.right , newRoot.right);
+    }
+
 
     @Override
     public String toString() {

@@ -50,6 +50,36 @@ public class TestBinaryTree {
         System.out.println(binaryTree.postOrderTraversalDFS());
         System.out.println(binaryTree2.postOrderTraversalDFS());
 
+        System.out.println("Height of the tree: " + binaryTree.height());
+        System.out.println("Height of the tree: " + binaryTree2.height());
+
+        System.out.println("Minimum value of the tree: " + binaryTree.min());
+        System.out.println("Minimum value of the tree: " + binaryTree2.min());
+
+
+        BinaryTree binaryTree3 = new BinaryTree();
+        binaryTree3.add(20);
+        binaryTree3.add(10);
+        binaryTree3.add(6);
+        binaryTree3.add(14);
+        binaryTree3.add(3);
+        binaryTree3.add(8);
+        binaryTree3.add(30);
+        binaryTree3.add(24);
+        binaryTree3.add(26);
+
+        BinaryTree binaryTree4 = new BinaryTree();
+        binaryTree4.add(20);
+        binaryTree4.add(10);
+        binaryTree4.add(6);
+        binaryTree4.add(14);
+        binaryTree4.add(3);
+        binaryTree4.add(8);
+        binaryTree4.add(30);
+        binaryTree4.add(26);
+
+        System.out.println(binaryTree2.equals(binaryTree4));
+
 
 
     }
