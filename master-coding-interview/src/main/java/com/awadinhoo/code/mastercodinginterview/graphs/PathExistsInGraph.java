@@ -9,24 +9,22 @@ public class PathExistsInGraph {
 
         HashMap<Integer, List<Integer>> adjacencyList = buildGraph(edges);
         System.out.println(adjacencyList);
-        return validPath(adjacencyList, source, destination, new HashSet<>() , new ArrayList<>());
+        return validPath(adjacencyList, source, destination, new HashSet<>());
     }
 
 
-    private static boolean validPath(HashMap<Integer, List<Integer>> adjacencyList , int source, int destination, Set<Integer> visited , List<Integer>  orderList){
+    private static boolean validPath(HashMap<Integer, List<Integer>> adjacencyList , int source, int destination,
+                                     Set<Integer> visited){
 
         if(source == destination){
             return true;
         }
 
         visited.add(source);
-        orderList.add(source);
-
         for (int neighbour : adjacencyList.get(source)){
 
             if(!visited.contains(neighbour)){
-                if(validPath(adjacencyList, neighbour, destination, visited, orderList)){
-                    System.out.println("Order List: " + orderList);
+                if(validPath(adjacencyList, neighbour, destination, visited)){
                     return true;
                 }
             }
@@ -39,12 +37,12 @@ public class PathExistsInGraph {
 
         HashMap<Integer, List<Integer>> adjacencyList = buildGraph(edges);
         System.out.println(adjacencyList);
-        return validPathDFSIterative(adjacencyList, source, destination, new HashSet<>() , new ArrayList<>());
+        return validPathDFSIterative(adjacencyList, source, destination, new HashSet<>());
     }
 
 
     private static boolean validPathDFSIterative(HashMap<Integer, List<Integer>> adjacencyList , int source, int destination,
-                                                 Set<Integer> visited , List<Integer>  orderList){
+                                                 Set<Integer> visited){
 
         Stack<Integer> nodesStack = new Stack<>();
 
@@ -54,7 +52,6 @@ public class PathExistsInGraph {
             int current = nodesStack.pop();
 
             if(current == destination){
-                System.out.println("Order List: " + orderList);
                 return true;
             }
 
@@ -63,7 +60,6 @@ public class PathExistsInGraph {
             }
 
             visited.add(current);
-            orderList.add(current);
             for (int neighbour : adjacencyList.get(current)){
                 if(!visited.contains(neighbour)){
                    nodesStack.push(neighbour);
@@ -71,7 +67,6 @@ public class PathExistsInGraph {
             }
         }
 
-        System.out.println("Order List: " + orderList);
         return false;
     }
 
@@ -80,12 +75,12 @@ public class PathExistsInGraph {
 
         HashMap<Integer, List<Integer>> adjacencyList = buildGraph(edges);
         System.out.println(adjacencyList);
-        return validPathBFS(adjacencyList, source, destination, new HashSet<>() , new ArrayList<>());
+        return validPathBFS(adjacencyList, source, destination, new HashSet<>());
     }
 
 
     private static boolean validPathBFS(HashMap<Integer, List<Integer>> adjacencyList , int source, int destination,
-                                        Set<Integer> visited, List<Integer>  orderList){
+                                        Set<Integer> visited){
 
         Queue<Integer> nodesQueue = new ArrayDeque<>();
 
@@ -95,7 +90,6 @@ public class PathExistsInGraph {
             int current = nodesQueue.remove();
 
             if(current == destination){
-                System.out.println("Order List: " + orderList);
                 return true;
             }
 
@@ -104,7 +98,6 @@ public class PathExistsInGraph {
             }
 
             visited.add(current);
-            orderList.add(current);
             for (int neighbour : adjacencyList.get(current)){
                 if(!visited.contains(neighbour)){
                     nodesQueue.add(neighbour);
@@ -112,8 +105,6 @@ public class PathExistsInGraph {
             }
 
         }
-
-        System.out.println("Order List: " + orderList);
         return false;
     }
 
@@ -143,6 +134,22 @@ public class PathExistsInGraph {
 
             adjacencyList.get(firstNode).add(secondNode);
             adjacencyList.get(secondNode).add(firstNode);
+        }
+
+        return adjacencyList;
+    }
+
+    private static HashMap<Integer, List<Integer>> buildGraph_v2(int[][] edges){
+
+        HashMap<Integer, List<Integer>> adjacencyList = new HashMap<>();
+
+        for(int i = 0 ; i < edges.length ; i++){
+
+            int firstNode = edges[i][0];
+            int secondNode = edges[i][1];
+
+            adjacencyList.computeIfAbsent(firstNode, val -> new ArrayList<>()).add(secondNode);
+            adjacencyList.computeIfAbsent(secondNode, val -> new ArrayList<>()).add(firstNode);
         }
 
         return adjacencyList;
