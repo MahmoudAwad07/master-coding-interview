@@ -1,6 +1,8 @@
 package com.awadinhoo.code.mastercodinginterview.graphs;
 
+import java.util.ArrayDeque;
 import java.util.HashSet;
+import java.util.Queue;
 import java.util.Set;
 
 public class NumberOfIslands {
@@ -19,6 +21,7 @@ public class NumberOfIslands {
 
                 if(grid[i][j] == '1'){
                     exploreDFS(grid, i , rows, j, columns);
+                    //exploreBFS(grid, i , rows, j, columns);
                     numOfIslands++;
                 }
             }
@@ -37,6 +40,42 @@ public class NumberOfIslands {
         exploreDFS(grid, i-1 , rows, j, columns);
         exploreDFS(grid, i+1 , rows , j , columns);
         exploreDFS(grid, i , rows , j-1, columns);
+    }
+
+
+    private static void exploreBFS(int[][] grid, int i, int rows , int j, int columns) {
+
+        Queue<Cell> cells = new ArrayDeque<>();
+
+        cells.add(new Cell(i,j));
+        while (!cells.isEmpty()){
+
+            Cell cell = cells.remove();
+            int row = cell.row;
+            int column = cell.column;
+
+            if(row < 0 || column < 0 || row >= rows || column >= columns || grid[row][column] == '0'){
+                continue;
+            }
+
+            grid[row][column] = '0';
+            cells.add(new Cell(row, column +1));
+            cells.add(new Cell(row, column - 1));
+            cells.add(new Cell(row -1 , column));
+            cells.add(new Cell(row +1, column));
+
+        }
+    }
+
+
+    private static class Cell{
+        int row ;
+        int column;
+
+        public Cell(int row, int column) {
+            this.row = row;
+            this.column = column;
+        }
     }
 
     public static void main(String[] args) {
