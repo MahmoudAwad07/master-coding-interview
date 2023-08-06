@@ -63,6 +63,11 @@ public class TestGraph {
 
         System.out.println(graph3);
         System.out.println(graph3.topologicalSort());
+        System.out.println(graph3.revisitedTopologicalSort());
+
+        System.out.println(graph3.hasCycle());
+        graph3.addEdge("P", "X");
+        System.out.println(graph3.hasCycle());
 
 
 

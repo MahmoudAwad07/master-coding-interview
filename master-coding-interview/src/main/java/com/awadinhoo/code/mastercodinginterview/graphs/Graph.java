@@ -137,6 +137,37 @@ public class Graph {
         return traversedNodes;
     }
 
+    public List<String> revisitedTopologicalSort(){
+
+        List<String> sortedNodes = new ArrayList<>();
+        Stack<Node> traversedNodes = new Stack<>();
+        Set<Node> visited = new HashSet<>();
+        for( Node node : nodes.values()){
+            revisitedTopologicalSort(node, visited ,traversedNodes);
+        }
+
+        while (!traversedNodes.isEmpty()){
+            sortedNodes.add(traversedNodes.pop().label);
+        }
+
+        return sortedNodes;
+    }
+
+
+    private void revisitedTopologicalSort(Node node, Set<Node> visited, Stack<Node> traversedNodes) {
+
+        if (visited.contains(node)){
+           return;
+        }
+
+        visited.add(node);
+        for (Node neighbour : adjacencyList.get(node)){
+            if(!visited.contains(neighbour)){
+                revisitedTopologicalSort(neighbour, visited, traversedNodes);
+            }
+        }
+        traversedNodes.push(node);
+    }
 
 
     private void traverseDFS(String node , Set<Node> visited, List<String> traversedNodes){
@@ -190,6 +221,39 @@ public class Graph {
         }
     }
 
+
+    public boolean hasCycle(){
+
+        Set<Node> visited = new HashSet<>();
+        Set<Node> visiting = new HashSet<>();
+
+        for ( Node node  : nodes.values()){
+            if(hasCycle(node, visited, visiting))
+                return true;
+        }
+        return false;
+    }
+
+
+    private boolean hasCycle(Node current, Set<Node> visited, Set<Node> visiting){
+
+        visiting.add(current);
+
+        for( Node neighbour : adjacencyList.get(current)){
+
+            if(visited.contains(neighbour))
+                continue;
+
+            if (visiting.contains(neighbour))
+                return true;
+
+            if(hasCycle(neighbour, visited, visiting))
+                return true;
+        }
+        visiting.remove(current);
+        visited.add(current);
+        return false;
+    }
 
 
 
