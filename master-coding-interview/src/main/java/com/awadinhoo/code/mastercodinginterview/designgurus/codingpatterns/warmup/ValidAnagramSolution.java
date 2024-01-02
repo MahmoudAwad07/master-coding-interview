@@ -10,6 +10,9 @@ public class ValidAnagramSolution {
 
     public static boolean isAnagram(String s, String t) {
 
+        // Time Complexity ---> O(n Log n)
+        // Space Complexity --> O(n)
+
         if(s.length() != t.length())
             return false;
 
@@ -26,6 +29,9 @@ public class ValidAnagramSolution {
     }
 
     public static boolean isAnagram_v2(String s, String t) {
+
+        // Time Complexity ---> O(n)
+        // Space Complexity --> O(n)
 
         if(s.length() != t.length())
             return false;
